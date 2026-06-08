@@ -665,7 +665,7 @@ footer {
     <div class="form-row">
         <div class="form-group">
             <label for="telephone">Téléphone</label>
-            <input type="tel" id="telephone" name="telephone" placeholder="Exemple: +212612345678" pattern="[+0-9\s\-()]{8,}">
+            <input type="tel" id="telephone" name="telephone" placeholder="Exemple: +212612345678" pattern=".{8,}">
             <span class="error-message">Veuillez entrer un numéro de téléphone valide</span>
         </div>
 
@@ -979,28 +979,28 @@ form.addEventListener('submit', function(e) {
         const data = Object.fromEntries(formData);
         
         // Simuler un délai de traitement
-        fetch("https://script.google.com/macros/s/AKfycbyjtTSzfPkc74dSsrcGgatcH9TMsIzEfLQ-Cxxy7lD1AHrQNxKf3ff7wgMAzCHPvPXR/exec", {
+        fetch(
+  "https://script.google.com/macros/s/AKfycbywKK26zFzhSFSL21nlckOcFiA87uTW_r06apPLJEXlAVe58kUvv3SbNdbE_ZpCnLeu/exec",
+  {
     method: "POST",
+    mode: "no-cors",
     headers: {
-        "Content-Type": "application/json"
+      "Content-Type": "text/plain"
     },
     body: JSON.stringify(data)
+  }
+)
+.then(() => {
+    showSuccessModal(data);
 })
-.then(response => response.text())
-.then(text => {
-    console.log(text);
+.catch(error => {
+    console.error(error);
 
-    const result = JSON.parse(text);
-
-    if(result.success){
-        showSuccessModal(data);
-    } else {
-        messageManager.error(
-            "Erreur",
-            result.error || "Impossible d'enregistrer l'inscription."
-        );
-    }
-})
+    messageManager.error(
+        "Erreur",
+        "Impossible d'enregistrer l'inscription."
+    );
+});
 .catch(error => {
     console.error(error);
 
