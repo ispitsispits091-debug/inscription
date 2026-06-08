@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<!-- saved from url=(0059)file:///C:/Users/TAOUFIQ/Downloads/inion-success.html -->
+<!-- saved from url=(0059)file:///C:/Users/TAOUFIQ/Downloads/inscription-success.html -->
 <html lang="fr"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ISPITSM Marrakech - Inion &amp; Réinscription</title>
+<title>ISPITSM Marrakech - Inscription &amp; Réinscription</title>
 
 <style>
 * {
@@ -602,7 +602,7 @@ footer {
 
 <header>
     <h1>ISPITSM Marrakech</h1>
-    <h3>Inscription et Réinscription aux Semestres </h3>
+    <h3>Inscription et Réinscription aux Semestres Printemps S2</h3>
     <p>Année Académique 2025-2026</p>
 </header>
 
@@ -697,24 +697,24 @@ footer {
         <div class="form-group">
             <label for="option" class="required">Option</label>
             <select id="option" name="option" required="">
-                 <option value="">-- Sélectionner une option --</option>
-                <option value="IP">IP - Infirmier polyvalent</option>
-                <option value="ISM">ISM - Infirmier en Santé Mentale</option>
+                <option value="">-- Sélectionner une option --</option>
+                <option value="IP">IP - Infirmier de Pratique</option>
+                <option value="ISM">ISM - Infirmier en Santé Maternelle</option>
                 <option value="IAR">IAR - Infirmier en Anesthésie et Réanimation</option>
-                <option value="ISUSI">ISUSI - Infirmier en Soins d'Urgence et Soins Intensifs</option>
+                <option value="ISUSI">ISUSI - Infirmier en Santé et Urgences Sociales</option>
                 <option value="IBO">IBO - Infirmier en Bloc Opératoire</option>
                 <option value="IG">IG - Infirmier en Gériatrie</option>
-                <option value="ISFSC">ISFSC - Infirmier en Santé de Famille et Santé Communautaire</option>
+                <option value="ISFSC">ISFSC - Infirmier en Soins et Foyers Sociaux Communautaires</option>
                 <option value="INP">INP - Infirmier en Néonatologie et Pédiatrie</option>
-                <option value="SF">SF -  Sage-Femme</option>
-                <option value="LABO">LABO - Labortoire</option>
-                <option value="SE">SE - Santé et Environnement</option>
+                <option value="SF">SF - Sage-Femme</option>
+                <option value="LABO">LABO - Laborantin</option>
+                <option value="SE">SE - Secrétaire Médical</option>
                 <option value="RADIO">RADIO - Radiologo</option>
-                <option value="SS">SS - statistique sanitaire</option>
-                <option value="ORTHO">ORTHO - Orthoprothésie</option>
-                <option value="KINE">KINE - Kinésithérapie</option>
-                <option value="PSY">PSY - Psychomotricité</option>
-                <option value="AS">AS - Assistant social</option>
+                <option value="SS">SS - Secouriste</option>
+                <option value="ORTHO">ORTHO - Orthophoniste</option>
+                <option value="KINE">KINE - Kinésithérapeute</option>
+                <option value="PSY">PSY - Psychologue</option>
+                <option value="AS">AS - Aide Soignant</option>
             </select>
             <span class="error-message">Veuillez sélectionner une option</span>
         </div>
@@ -887,7 +887,7 @@ class MessageManager {
 const messageManager = new MessageManager('messageContainer');
 
 // Récupérer le formulaire
-const form = document.getElementById('inionForm');
+const form = document.getElementById('inscriptionForm');
 const modalOverlay = document.getElementById('modalOverlay');
 
 // Fonction de validation
@@ -972,7 +972,7 @@ form.addEventListener('submit', function(e) {
     
     if (validation.isValid) {
         // Afficher un message de traitement
-        messageManager.info('⏳ Traitement', 'Votre inion est en cours de traitement...');
+        messageManager.info('⏳ Traitement', 'Votre inscription est en cours de traitement...');
         
         // Récupérer les données du formulaire
         const formData = new FormData(form);
@@ -1003,7 +1003,7 @@ function showSuccessModal(data) {
     
     document.getElementById('referenceNumber').textContent = `#INS-${refNumber}`;
     modalTitle.textContent = `Bienvenue, ${data.prenom} ${data.nom}!`;
-    modalMessage.textContent = 'Votre inion a été enregistrée avec succès!';
+    modalMessage.textContent = 'Votre inscription a été enregistrée avec succès!';
     
     // Construire les détails
     const detailsHtml = `
@@ -1021,7 +1021,7 @@ function showSuccessModal(data) {
         </div>
         <div class="modal-detail-item">
             <span class="modal-detail-label">📝 Type:</span>
-            <span class="modal-detail-value">${data.type === 'inion' ? 'Première inion' : 'Réinion'}</span>
+            <span class="modal-detail-value">${data.type === 'inscription' ? 'Première inscription' : 'Réinscription'}</span>
         </div>
         <div class="modal-detail-item">
             <span class="modal-detail-label">✉️ Email:</span>
@@ -1043,13 +1043,13 @@ function showSuccessModal(data) {
     
     // Message de succès
     messageManager.success(
-        '🎉 Inion Réussie!',
+        '🎉 Inscription Réussie!',
         'Vérifiez votre email pour les prochaines étapes.',
         `Numéro de référence: <strong>#INS-${refNumber}</strong>`
     );
     
     // Sauvegarder les données
-    saveInionData(data, refNumber);
+    saveInscriptionData(data, refNumber);
 }
 
 function getFiliereName(code) {
@@ -1067,13 +1067,13 @@ function generateReferenceNumber() {
     return Math.floor(Math.random() * 1000000).toString().padStart(6, '0');
 }
 
-function saveInionData(data, refNumber) {
-    const inion = {
+function saveInscriptionData(data, refNumber) {
+    const inscription = {
         ...data,
-        dateInion: new Date().toLocaleString('fr-FR'),
+        dateInscription: new Date().toLocaleString('fr-FR'),
         numeroReference: refNumber
     };
-    localStorage.setItem('derniere-inion', JSON.stringify(inion));
+    localStorage.setItem('derniere-inscription', JSON.stringify(inscription));
 }
 
 function closeModal() {
@@ -1082,9 +1082,9 @@ function closeModal() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
-function printInion() {
-    const inion = JSON.parse(localStorage.getItem('derniere-inion'));
-    if (inion) {
+function printInscription() {
+    const inscription = JSON.parse(localStorage.getItem('derniere-inscription'));
+    if (inscription) {
         const printContent = `
             <!DOCTYPE html>
             <html>
@@ -1101,46 +1101,46 @@ function printInion() {
             <body>
                 <div class="header">
                     <h1>ISPITSM Marrakech</h1>
-                    <p>Confirmation d'Inion</p>
+                    <p>Confirmation d'Inscription</p>
                 </div>
                 <div class="reference">
-                    <p><strong>Numéro de Référence:</strong> #INS-${inion.numeroReference}</p>
-                    <p><strong>Date d'Inion:</strong> ${inion.dateInion}</p>
+                    <p><strong>Numéro de Référence:</strong> #INS-${inscription.numeroReference}</p>
+                    <p><strong>Date d'Inscription:</strong> ${inscription.dateInscription}</p>
                 </div>
                 <div class="details">
                     <h3>Informations Personnelles</h3>
                     <div class="detail-row">
                         <span>Nom:</span>
-                        <span>${inion.nom}</span>
+                        <span>${inscription.nom}</span>
                     </div>
                     <div class="detail-row">
                         <span>Prénom:</span>
-                        <span>${inion.prenom}</span>
+                        <span>${inscription.prenom}</span>
                     </div>
                     <div class="detail-row">
                         <span>Email:</span>
-                        <span>${inion.email}</span>
+                        <span>${inscription.email}</span>
                     </div>
                     <div class="detail-row">
                         <span>Téléphone:</span>
-                        <span>${inion.telephone || 'N/A'}</span>
+                        <span>${inscription.telephone || 'N/A'}</span>
                     </div>
                     <h3>Informations Académiques</h3>
                     <div class="detail-row">
                         <span>Filière:</span>
-                        <span>${getFiliereName(inion.filiere)}</span>
+                        <span>${getFiliereName(inscription.filiere)}</span>
                     </div>
                     <div class="detail-row">
                         <span>Option:</span>
-                        <span>${inion.option}</span>
+                        <span>${inscription.option}</span>
                     </div>
                     <div class="detail-row">
                         <span>Semestre:</span>
-                        <span>${inion.semestre}</span>
+                        <span>${inscription.semestre}</span>
                     </div>
                     <div class="detail-row">
                         <span>Type:</span>
-                        <span>${inion.type === 'inion' ? 'Première inion' : 'Réinion'}</span>
+                        <span>${inscription.type === 'inscription' ? 'Première inscription' : 'Réinscription'}</span>
                     </div>
                 </div>
             </body>
@@ -1154,33 +1154,33 @@ function printInion() {
     }
 }
 
-function downloadInion() {
-    const inion = JSON.parse(localStorage.getItem('derniere-inion'));
-    if (inion) {
+function downloadInscription() {
+    const inscription = JSON.parse(localStorage.getItem('derniere-inscription'));
+    if (inscription) {
         const content = `
-CONFIRMATION D'INION
+CONFIRMATION D'INSCRIPTION
 ISPITSM Marrakech
 ==================================================
 
-NUMÉRO DE RÉFÉRENCE: #INS-${inion.numeroReference}
-DATE D'INION: ${inion.dateInion}
+NUMÉRO DE RÉFÉRENCE: #INS-${inscription.numeroReference}
+DATE D'INSCRIPTION: ${inscription.dateInscription}
 
 INFORMATIONS PERSONNELLES
 ==================================================
-Nom: ${inion.nom}
-Prénom: ${inion.prenom}
-Email: ${inion.email}
-Téléphone: ${inion.telephone || 'N/A'}
-CNI: ${inion.cni}
-Nationalité: ${inion.nationalite}
+Nom: ${inscription.nom}
+Prénom: ${inscription.prenom}
+Email: ${inscription.email}
+Téléphone: ${inscription.telephone || 'N/A'}
+CNI: ${inscription.cni}
+Nationalité: ${inscription.nationalite}
 
 INFORMATIONS ACADÉMIQUES
 ==================================================
-Filière: ${getFiliereName(inion.filiere)}
-Option: ${inion.option}
-Semestre: ${inion.semestre}
-Année Universitaire: ${inion.anneeUniversitaire}
-Type d'Inion: ${inion.type === 'inion' ? 'Première inion' : 'Réinion'}
+Filière: ${getFiliereName(inscription.filiere)}
+Option: ${inscription.option}
+Semestre: ${inscription.semestre}
+Année Universitaire: ${inscription.anneeUniversitaire}
+Type d'Inscription: ${inscription.type === 'inscription' ? 'Première inscription' : 'Réinscription'}
 
 ==================================================
 © 2025-2026 ISPITSM Marrakech
@@ -1190,7 +1190,7 @@ Type d'Inion: ${inion.type === 'inion' ? 'Première inion' : 'Réinion'}
         const url = window.URL.createObjectURL(blob);
         const a = document.createElement('a');
         a.href = url;
-        a.download = `inion-${inion.numeroReference}.txt`;
+        a.download = `inscription-${inscription.numeroReference}.txt`;
         a.click();
         window.URL.revokeObjectURL(url);
     }
@@ -1245,11 +1245,11 @@ modalOverlay.addEventListener('click', function(e) {
 window.addEventListener('load', function() {
     messageManager.success(
         '👋 Bienvenue!',
-        'Remplissez le formulaire ci-dessous pour procéder à votre inion.',
+        'Remplissez le formulaire ci-dessous pour procéder à votre inscription.',
         'Tous les champs marqués d\'un astérisque (*) sont obligatoires.'
     );
 });
-</>
+</script>
 
 
 </body></html>
