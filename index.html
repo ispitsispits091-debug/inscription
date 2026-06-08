@@ -4,7 +4,6 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>ISPITS Marrakech - Inscription &amp; Réinscription</title>
-option
 <style>
 * {
     box-sizing: border-box;
@@ -958,7 +957,8 @@ function isValidCNI(cni) {
 
 function isValidYear(year) {
     const currentYear = new Date().getFullYear();
-    return /^[0-9]{4}$/.test(year) && year >= 1950 && year <= currentYear;
+    const y = parseInt(year, 10);
+return /^[0-9]{4}$/.test(year) && y >= 1950 && y <= currentYear;
 }
 
 function isValidPhone(phone) {
@@ -990,11 +990,15 @@ form.addEventListener('submit', function(e) {
 
 fetch(WEBAPP_URL, {
     method: "POST",
-    mode: "no-cors",
     headers: {
-        "Content-Type": "text/plain"
+        "Content-Type": "application/json"
     },
     body: JSON.stringify(data)
+})
+.then(response => response.text())
+.then(result => {
+    console.log(result);
+    showSuccessModal(data);
 })
 .then(() => {
     showSuccessModal(data);
@@ -1006,6 +1010,8 @@ fetch(WEBAPP_URL, {
         "Impossible d'enregistrer l'inscription."
     );
 });
+
+}); // fermeture du submit
 // Afficher le modal de confirmation
 function showSuccessModal(data) {
     const modalTitle = document.getElementById('modalTitle');
