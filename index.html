@@ -986,18 +986,20 @@ form.addEventListener('submit', function(e) {
     },
     body: JSON.stringify(data)
 })
-.then(response => response.json())
-.then(result => {
+.then(response => response.text())
+.then(text => {
+    console.log(text);
+
+    const result = JSON.parse(text);
 
     if(result.success){
         showSuccessModal(data);
     } else {
         messageManager.error(
             "Erreur",
-            "Impossible d'enregistrer l'inscription."
+            result.error || "Impossible d'enregistrer l'inscription."
         );
     }
-
 })
 .catch(error => {
     console.error(error);
